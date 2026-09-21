@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Panel de Control - Administración</title>
+
+    <!-- Conexión con CSS del módulo Admin -->
+    <link rel="stylesheet" href="../css/Ges_Universidad.css">
+</head>
+
+<body>
+    <!-- BARRA LATERAL -->
+    <aside class="sidebar">
+        <div class="logo-admin">
+            <h2>Academia Pro</h2>
+            <span>Portal Universitario</span>
+        </div>
+        <div class="usuario-admin">
+            <strong>Coordinador</strong>
+        </div>
+       <nav class="menu">
+            <a href="Ges_Universidad.html">
+                 Panel de Control
+            </a>
+
+            <a href="CrearUsuario.html">
+                 Crear Usuario
+            </a>
+
+            <a href="CrearMateria.html">
+                 Crear Materia
+            </a>
+
+            <a href="CrearGrupo.html">
+                 Crear Grupo
+            </a>
+
+            <a href="../../html/Registro.html" id="btnCerrarSesion">
+                 Cerrar Sesión
+            </a>
+        </nav>
+        </nav>
+    </aside>
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="contenido">
+        <!-- BARRA SUPERIOR -->
+        <header class="topbar">
+            <div class="buscador">
+                <input
+                    type="text"
+                    id="buscar"
+                    placeholder="Buscar..."
+                >
+            </div>
+            <div class="perfil">
+                <span>♧</span>
+                <span>◐</span>
+                <div>
+                    <strong>Dr. Carlos Mendoza</strong>
+                    <small>Administrador</small>
+                </div>
+                <div class="avatar">
+                    CM
+                </div>
+            </div>
+        </header>
+        <!-- ENCABEZADO -->
+        <section class="encabezado-panel">
+            <div>
+                <h1>
+                    Panel de Control Principal - Gestión Universitaria
+                </h1>
+                <p>
+                    Resumen general de gestión académica y administrativa.
+                </p>
+            </div>
+            <div class="acciones-panel">
+                <button id="btnReporte">
+                    Reporte<br>Rápido
+                </button>
+                <button id="btnSincronizar">
+                    ⇅ Sincronizar<br>Datos
+                </button>
+            </div>
+        </section>
+        <!-- TARJETAS DE INFORMACIÓN -->
+        <section class="estadisticas">
+            <div class="estadistica">
+                <div>
+                    <span>Materias Activas</span>
+                    <strong>142</strong>
+                    <small>↗ 5% este semestre</small>
+                </div>
+                <div class="icono-estadistica">
+                    
+                </div>
+            </div>
+            <div class="estadistica">
+                <div>
+                    <span>Usuarios del Sistema</span>
+                    <strong>1,248</strong>
+                    <small>Docentes y Estudiantes activos</small>
+                </div>
+
+                <div class="icono-estadistica">
+                </div>
+            </div>
+            <div class="estadistica">
+                <div>
+                    <span>Grupos y Períodos</span>
+                    <strong>38</strong>
+                    <small>Período Académico 2024-II</small>
+                </div>
+                <div class="icono-estadistica">
+                </div>
+            </div>
+        </section>
+        <!-- TABLaS -->
+        <section class="tablas">
+            <!-- MATERIAS -->
+            <div class="tabla-contenedor">
+                <div class="titulo-tabla">
+                    <h2>
+                        Gestión de Materias
+                    </h2>
+                    <a href="#">
+                        Ver todas
+                    </a>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Materia</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>MAT-101</td>
+                            <td>Cálculo Diferencial</td>
+                            <td>
+                                <span class="estado activo-estado">
+                                    ACTIVO
+                                </span>
+                            </td>
+                            <td>✎ ◉</td>
+                        </tr>
+                        <tr>
+                            <td>FIS-201</td>
+                            <td>Física Clásica</td>
+                            <td>
+                                <span class="estado activo-estado">
+                                    ACTIVO
+                                </span>
+                            </td>
+                            <td>✎ ◉</td>
+                        </tr>
+                        <tr>
+                            <td>HIS-105</td>
+                            <td>Historia Moderna</td>
+                            <td>
+                                <span class="estado inactivo-estado">
+                                    INACTIVO
+                                </span>
+                            </td>
+                            <td>✎ ◉</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- DOCENTES -->
+            <div class="tabla-contenedor">
+                <div class="titulo-tabla">
+                    <h2>
+                        Gestión de Docentes
+                    </h2>
+                    <a href="#">
+                        Ver todos
+                    </a>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Docente</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>D-042</td>
+                            <td>Dr. Elena Márquez</td>
+                            <td>
+                                <span class="estado activo-estado">
+                                    ACTIVO
+                                </span>
+                            </td>
+                            <td>✎ ◉</td>
+                        </tr>
+                        <tr>
+                            <td>D-108</td>
+                            <td>Mgt. Carlos Ruiz</td>
+                            <td>
+                                <span class="estado activo-estado">
+                                    ACTIVO
+                                </span>
+                            </td>
+                            <td>✎ ◉</td>
+                        </tr>
+                        <tr>
+                            <td>D-055</td>
+                            <td>Lic. Ana Gómez</td>
+                            <td>
+                                <span class="estado inactivo-estado">
+                                    INACTIVO
+                                </span>
+                            </td>
+                            <td>✎ ◉</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <!-- ACCESOS RÁPIDOS -->
+        <section class="accesos">
+            <div class="titulo-accesos">
+                <h2>
+                     Accesos Rápidos de Administración
+                </h2>
+                <span>
+                    Gestión Global Institucional
+                </span>
+            </div>
+            <div class="accesos-grid">
+                <button class="acceso">
+                    <span class="acceso-icono">
+                    </span>
+                    <div>
+                        <strong>Crear Usuario</strong>
+                        <small>Docentes y Estudiantes</small>
+                    </div>
+                </button>
+                <button class="acceso">
+                    <span class="acceso-icono">
+                    </span>
+                    <div>
+                        <strong>Crear Materia</strong>
+                        <small>Plan curricular</small>
+                    </div>
+                </button>
+                <button class="acceso">
+                    <span class="acceso-icono">
+                    </span>
+                    <div>
+                        <strong>Crear Grupo</strong>
+                        <small>Comisiones y aulas</small>
+                    </div>
+                </button>
+            </div>
+        </section>
+    </main>
+    <!-- PIE DE PÁGINA -->
+    <footer class="footer-admin">
+        <span>
+            © 2024 Academia Pro - Sistema de Gestión Institucional
+        </span>
+    </footer>
+    <script src="../js/Ges_Universidad.js"></script>
+</body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Crear Materia | Academia Pro</title>
+
+    <link rel="stylesheet" href="../css/materia.css">
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>Academia Pro</h2>
+            <p>PORTAL UNIVERSITARIO</p>
+        </div>
+
+        <div class="perfil-admin">
+            <strong>Administrador</strong>
+            <span>Panel administrativo</span>
+        </div>
+        <nav class="menu">
+            <a href="Ges_Universidad.html">
+                 Panel de Control
+            </a>
+
+            <a href="CrearUsuario.html">
+                 Crear Usuario
+            </a>
+
+            <a href="CrearMateria.html" class="activo">
+                 Crear Materia
+            </a>
+
+            <a href="CrearGrupo.html">
+                 Crear Grupo
+            </a>
+
+            <a href="../../html/Registro.html" id="btnCerrarSesion">
+                 Cerrar Sesión
+            </a>
+        </nav>
+    </aside>
+    <main class="contenido">
+        <header class="barra-superior">
+            <div class="ruta">
+                <strong>Academia Pro</strong>
+                <span>/ Crear Materia</span>
+            </div>
+
+            <div class="usuario-superior">
+                <span>Administrador</span>
+                <div class="avatar">AD</div>
+            </div>
+        </header>
+        <section class="encabezado">
+            <div>
+                <small>ADMINISTRACIÓN ACADÉMICA</small>
+                <h1>Catálogo de Asignaturas & Plan Curricular</h1>
+                <p>
+                    Configure las materias, créditos y requisitos
+                    del plan académico institucional.
+                </p>
+            </div>
+
+            <div class="acciones-superiores">
+
+                <button type="button" id="btnVersiones">
+                     Versiones Curriculares
+                </button>
+
+                <button type="button" id="btnImportar">
+                     Importar Excel
+                </button>
+
+                <input
+                    type="file"
+                    id="archivoExcel"
+                    accept=".xlsx,.xls,.csv"
+                    hidden
+                >
+            </div>
+        </section>
+        <section class="aviso">
+
+            <div class="aviso-icono">▣</div>
+
+            <div>
+                <strong>Sistema Nacional de Acreditación Curricular Activo</strong>
+
+                <p>
+                    Cada asignatura debe cumplir los parámetros académicos institucionales.
+                </p>
+            </div>
+        </section>
+        <form id="formMateria">
+
+            <section class="bloque">
+
+                <div class="titulo-bloque">
+                    <span>1</span>
+                    <h2>Datos de Identificación</h2>
+                </div>
+
+                <div class="campos">
+
+                    <div class="campo">
+                        <label for="codigoMateria">
+                            Código de Materia *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="codigoMateria"
+                            placeholder="SYS-304"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="nombreMateria">
+                            Nombre de la Asignatura *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nombreMateria"
+                            placeholder="Arquitectura de Microservicios"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="formatoCodigo">
+                            Formato del Código
+                        </label>
+
+                        <select id="formatoCodigo">
+                            <option value="alfanumerico">
+                                Letras y números
+                            </option>
+
+                            <option value="numerico">
+                                Numérico
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="facultad">
+                            Facultad Académica *
+                        </label>
+
+                        <select id="facultad" required>
+                            <option value="">
+                                Seleccione una facultad
+                            </option>
+
+                            <option value="Ingeniería">
+                                Ingeniería y Ciencias Aplicadas
+                            </option>
+
+                            <option value="Salud">
+                                Ciencias de la Salud
+                            </option>
+
+                            <option value="Economía">
+                                Ciencias Económicas
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="programa">
+                            Programa de Estudio *
+                        </label>
+
+                        <select id="programa" required>
+                            <option value="">
+                                Seleccione un programa
+                            </option>
+
+                            <option value="Ingeniería de Sistemas">
+                                Ingeniería de Sistemas
+                            </option>
+
+                            <option value="Ingeniería Industrial">
+                                Ingeniería Industrial
+                            </option>
+
+                            <option value="Administración">
+                                Administración de Empresas
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bloque">
+                <div class="titulo-bloque">
+                    <span>2</span>
+                    <h2>Créditos, Horas y Modalidad</h2>
+                </div>
+                <div class="campos">
+                    <div class="campo">
+                        <label for="creditos">
+                            Créditos Totales *
+                        </label>
+
+                        <input
+                            type="number"
+                            id="creditos"
+                            min="1"
+                            placeholder="4"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="horasTeoricas">
+                            Horas Teóricas por Semana *
+                        </label>
+
+                        <input
+                            type="number"
+                            id="horasTeoricas"
+                            min="0"
+                            placeholder="3"
+                            required
+                        >
+                    </div>
+                    <div class="campo">
+                        <label for="horasPracticas">
+                            Horas Prácticas por Semana *
+                        </label>
+
+                        <input
+                            type="number"
+                            id="horasPracticas"
+                            min="0"
+                            placeholder="2"
+                            required
+                        >
+                    </div>
+                    <div class="campo">
+                        <label for="nivel">
+                            Nivel o Semestre *
+                        </label>
+
+                        <select id="nivel" required>
+                            <option value="">
+                                Seleccione
+                            </option>
+                            <option value="1">1° Semestre</option>
+                            <option value="2">2° Semestre</option>
+                            <option value="3">3° Semestre</option>
+                            <option value="4">4° Semestre</option>
+                            <option value="5">5° Semestre</option>
+                            <option value="6">6° Semestre</option>
+                            <option value="7">7° Semestre</option>
+                            <option value="8">8° Semestre</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="tipoAsignatura">
+                            Tipo de Asignatura *
+                        </label>
+                        <select id="tipoAsignatura" required>
+                            <option value="">
+                                Seleccione
+                            </option>
+                            <option value="Obligatoria">
+                                Obligatoria
+                            </option>
+                            <option value="Electiva">
+                                Electiva
+                            </option>
+                            <option value="Práctica">
+                                Práctica
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+            <section class="bloque">
+                <div class="titulo-bloque">
+                    <span>3</span>
+                    <h2>Malla Curricular y Sílabo</h2>
+                </div>
+                <div class="campos">
+                    <div class="campo">
+                        <label for="prerrequisitos">
+                            Prerrequisitos Académicos
+                        </label>
+
+                        <textarea
+                            id="prerrequisitos"
+                            placeholder="Ejemplo: Matemáticas I"
+                        ></textarea>
+                    </div>
+
+                    <div class="campo">
+                        <label for="correquisitos">
+                            Correquisitos Simultáneos
+                        </label>
+
+                        <textarea
+                            id="correquisitos"
+                            placeholder="Ejemplo: Laboratorio de Física"
+                        ></textarea>
+                    </div>
+
+                    <div class="campo campo-completo">
+                        <label for="descripcion">
+                            Descripción del Sílabo
+                        </label>
+                        <textarea
+                            id="descripcion"
+                            placeholder="Describa los contenidos y objetivos de la asignatura"
+                        ></textarea>
+                    </div>
+                </div>
+            </section>
+            <div class="botones">
+
+                <button
+                    type="button"
+                    id="btnDescartar"
+                    class="btn-secundario"
+                >
+                     Descartar
+                </button>
+
+                <button
+                    type="button"
+                    id="btnVista"
+                    class="btn-secundario"
+                >
+                     Vista Previa
+                </button>
+
+                <button
+                    type="submit"
+                    id="btnGuardarMateria"
+                    class="btn-principal"
+                >
+                    Guardar Materia
+                </button>
+            </div>
+        </form>
+
+        <section class="tabla-contenedor">
+            <div class="cabecera-tabla">
+
+                <div>
+                    <h2>Asignaturas Registradas</h2>
+
+                    <p>
+                        Catálogo unificado de asignaturas activas.
+                    </p>
+                </div>
+
+                <input
+                    type="text"
+                    id="buscarMateria"
+                    placeholder="Buscar materia..."
+                >
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Programa</th>
+                        <th>Nivel</th>
+                        <th>Tipo</th>
+                        <th>Créditos</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaCuerpo"></tbody>
+            </table>
+        </section>
+    </main>
+    <script src="../js/materia.js"></script>
+</body>
+</html>

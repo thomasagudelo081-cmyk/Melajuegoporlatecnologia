@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Registro de Usuario - Academia Pro</title>
+
+    <link rel="stylesheet" href="../css/Ges_Universidad.css">
+    <link rel="stylesheet" href="../css/usuario.css">
+</head>
+
+<body>
+    <!-- BARRA LATERAL -->
+    <aside class="sidebar">
+        <div class="logo-admin">
+            <h2>Academia Pro</h2>
+            <span>PORTAL UNIVERSITARIO</span>
+        </div>
+
+        <div class="usuario-admin">
+            <strong>Dr. Carlos Mendoza</strong>
+            <small>Administrador Central</small>
+        </div>
+        <nav class="menu">
+            <a href="Ges_Universidad.html">
+                 Panel de Control
+            </a>
+            
+            <a href="CrearUsuario.html" class="activo">
+                 Crear Usuario
+            </a>
+
+            <a href="CrearMateria.html">
+                 Crear Materia
+            </a>
+
+            <a href="CrearGrupo.html">
+                 Crear Grupo
+            </a>
+
+            <a href="../../html/Registro.html" id="btnCerrarSesion">
+                 Cerrar Sesión
+            </a>
+        </nav>
+    </aside>
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="contenido">
+        <!-- BARRA SUPERIOR -->
+        <header class="topbar">
+            <div class="ruta">
+                <strong>Academia Pro</strong>
+                <span>/ Crear Usuario</span>
+            </div>
+
+            <div class="perfil">
+
+                <span>1</span>
+                <span>2</span>
+                <div>
+                    <strong>Dr. Carlos Mendoza</strong>
+                    <small>Administrador Central</small>
+                </div>
+
+                <div class="avatar">
+                    CM
+                </div>
+            </div>
+        </header>
+        <!-- ENCABEZADO -->
+        <section class="encabezado-usuario">
+            <div>
+                <div class="titulo-superior">
+                    INICIO 1 DE 4
+                </div>
+
+                <h1>
+                    Registro de Usuario Institucional
+                </h1>
+                <p>
+                    Cree y configure un nuevo usuario para el sistema académico.
+                </p>
+            </div>
+            <div class="acciones-superiores">
+                <span class="etiqueta-periodo">
+                    Período 2025-I
+                </span>
+                <button id="btnCargaMasiva">
+                     Carga Masiva (.CSV)
+                </button>
+            </div>
+        </section>
+        <!-- FORMULARIO -->
+        <section class="area-formulario">
+            <form id="formUsuario">
+                <!-- PASO 1: PERFIL -->
+                <div class="bloque-formulario">
+
+                    <div class="paso">
+                        PASO 1 DE 4
+                    </div>
+
+                    <h2>
+                        Tipo de Perfil a Vincular
+                    </h2>
+
+                    <div class="perfiles-usuario">
+                        <label class="perfil-opcion">
+                            <input
+                                type="radio"
+                                name="tipoPerfil"
+                                value="estudiante"
+                            >
+                            <div class="perfil-contenido">
+                                <div class="perfil-icono">
+                                </div>
+                                <h3>
+                                    Estudiante Regular / Becado
+                                </h3>
+                                <p>
+                                    Gestión académica, liquidación financiera,
+                                    registro curricular y experiencia académica.
+                                </p>
+                            </div>
+                        </label>
+                        <label class="perfil-opcion">
+                            <input
+                                type="radio"
+                                name="tipoPerfil"
+                                value="docente"
+                            >
+                            <div class="perfil-contenido">
+                                <div class="perfil-icono">
+                                </div>
+                                <h3>
+                                    Cuerpo Docente / Investigador
+                                </h3>
+                                <p>
+                                    Habilita asignación de horas cátedra,
+                                    rubricas de evaluación y gestión académica.
+                                </p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <!-- PASO 2: DATOS PERSONALES -->
+                <div class="bloque-formulario">
+                    <div class="titulo-bloque">
+                        <span>2</span>
+                        <h2>Datos Personales y Ciudadanos</h2>
+                    </div>
+                    <div class="grid-campos">
+                        <div class="campo-usuario">
+                            <label for="nombres">
+                                Primer y Segundo Nombre *
+                            </label>
+                            <input
+                                type="text"
+                                id="nombres"
+                                placeholder="Ej. Mateo Alejandro"
+                            >
+                        </div>
+                        <div class="campo-usuario">
+                            <label for="apellidos">
+                                Apellidos Completos *
+                            </label>
+                            <input
+                                type="text"
+                                id="apellidos"
+                                placeholder="Ej. Rodríguez Pérez"
+                            >
+                        </div>
+                        <div class="campo-usuario">
+                            <label for="tipoDocumento">
+                                Tipo de Documento *
+                            </label>
+                            <select id="tipoDocumento">
+                                <option value="">
+                                    Cédula de Ciudadanía
+                                </option>
+                                <option value="cc">
+                                    Cédula de Ciudadanía
+                                </option>
+                                <option value="ti">
+                                    Tarjeta de Identidad
+                                </option>
+
+                                <option value="ce">
+                                    Cédula de Extranjería
+                                </option>
+                            </select>
+                        </div>
+                        <div class="campo-usuario">
+                            <label for="numeroDocumento">
+                                Número de Identificación *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="numeroDocumento"
+                                placeholder="Ej. 1028765432"
+                            >
+                        </div>
+
+                        <div class="campo-usuario">
+                            <label for="fechaNacimiento">
+                                Fecha de Nacimiento *
+                            </label>
+
+                            <input
+                                type="date"
+                                id="fechaNacimiento"
+                            >
+                        </div>
+
+                        <div class="campo-usuario">
+                            <label for="genero">
+                                Género Legal
+                            </label>
+
+                            <select id="genero">
+                                <option value="">
+                                    Seleccione
+                                </option>
+
+                                <option value="masculino">
+                                    Masculino
+                                </option>
+
+                                <option value="femenino">
+                                    Femenino
+                                </option>
+
+                                <option value="otro">
+                                    Otro
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- PASO 3: CONTACTO -->
+                <div class="bloque-formulario">
+                    <div class="titulo-bloque">
+                        <span>3</span>
+                        <h2>Canales de Contacto e Identidad Digital</h2>
+                    </div>
+
+                    <div class="grid-campos">
+                        <div class="campo-usuario">
+                            <label for="correoInstitucional">
+                                Correo Institucional Asignado *
+                            </label>
+
+                            <input
+                                type="email"
+                                id="correoInstitucional"
+                                placeholder="m.restrepo@universidad.edu"
+                            >
+                        </div>
+                        <div class="campo-usuario">
+                            <label for="correoPersonal">
+                                Correo Electrónico Personal
+                            </label>
+
+                            <input
+                                type="email"
+                                id="correoPersonal"
+                                placeholder="m.restrepo.personal@gmail.com"
+                            >
+                        </div>
+                        <div class="campo-usuario">
+                            <label for="telefono">
+                                Teléfono Móvil / WhatsApp *
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="telefono"
+                                placeholder="+57 314 890 1234"
+                            >
+                        </div>
+                        <div class="campo-usuario campo-completo">
+                            <label for="direccion">
+                                Dirección Residencial
+                            </label>
+                            <input
+                                type="text"
+                                id="direccion"
+                                placeholder="Calle 45 # 12-80 Apto 402"
+                            >
+                        </div>
+                    </div>
+                </div>
+                <!-- PASO 4: MATRÍCULA -->
+                <div class="bloque-formulario">
+                    <div class="titulo-bloque">
+                        <span>4</span>
+                        <h2>Parámetros Académicos de Matrícula</h2>
+                    </div>
+                    <div class="grid-campos">
+                        <div class="campo-usuario">
+                            <label for="programa">
+                                Programa / Carrera Asignada *
+                            </label>
+
+                            <select id="programa">
+
+                                <option value="">
+                                    Seleccione un programa
+                                </option>
+
+                                <option value="ingenieria-sistemas">
+                                    Ingeniería de Sistemas
+                                </option>
+
+                                <option value="ingenieria-industrial">
+                                    Ingeniería Industrial
+                                </option>
+
+                                <option value="administracion">
+                                    Administración de Empresas
+                                </option>
+                            </select>
+                        </div>
+                        <div class="campo-usuario">
+                            <label for="semestre">
+                                Semestre Inicial *
+                            </label>
+                            <select id="semestre">
+
+                                <option value="">
+                                    Seleccione
+                                </option>
+
+                                <option value="1">
+                                    1° Semestre
+                                </option>
+
+                                <option value="2">
+                                    2° Semestre
+                                </option>
+
+                                <option value="3">
+                                    3° Semestre
+                                </option>
+
+                                <option value="4">
+                                    4° Semestre
+                                </option>
+
+                                <option value="5">
+                                    5° Semestre
+                                </option>
+                            </select>
+                        </div>
+                        <div class="campo-usuario">
+                            <label for="jornada">
+                                Jornada
+                            </label>
+                            <select id="jornada">
+                                <option value="">
+                                    Seleccione jornada
+                                </option>
+
+                                <option value="diurna">
+                                    Diurna
+                                </option>
+
+                                <option value="nocturna">
+                                    Nocturna
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="opciones-estado">
+                        <div>
+                            <label>
+                                Estado Inicial del Estudiante
+                            </label>
+                            <div class="radio-grupo">
+                                <label>
+                                    <input
+                                        type="radio"
+                                        name="estado"
+                                        value="activo"
+                                        checked
+                                    >
+                                    Activo Regular
+                                </label>
+
+                                <label>
+                                    <input
+                                        type="radio"
+                                        name="estado"
+                                        value="becado"
+                                    >
+                                    Becado / Convenio
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label>
+                                Modalidad de Formación
+                            </label>
+                            <div class="radio-grupo">
+                                <label>
+                                    <input
+                                        type="radio"
+                                        name="modalidad"
+                                        value="presencial"
+                                        checked
+                                    >
+                                    Presencial Campus
+                                </label>
+                                <label>
+                                    <input
+                                        type="radio"
+                                        name="modalidad"
+                                        value="hibrido"
+                                    >
+                                    Híbrido / Virtual
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- PASO 5: SEGURIDAD -->
+                <div class="bloque-formulario">
+                    <div class="titulo-bloque">
+                        <span>5</span>
+                        <h2>Seguridad y Credenciales Provisionales</h2>
+                    </div>
+                    <div class="seguridad-grid">
+                        <div class="campo-usuario">
+                            <label for="contrasena">
+                                Contraseña Temporal de Acceso
+                            </label>
+
+                            <input
+                                type="password"
+                                id="contrasena"
+                                placeholder="Temporal2025!"
+                            >
+                            <small>
+                                El usuario deberá cambiar la contraseña
+                                en el primer inicio de sesión.
+                            </small>
+                        </div>
+                        <div class="opciones-seguridad">
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    id="cambioClave"
+                                    checked
+                                >
+                                Forzar cambio de clave
+                            </label>
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    id="notificarCorreo"
+                                    checked
+                                >
+                                Notificar credenciales vía correo
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- BOTONES -->
+                <div class="botones-usuario">
+                    <button type="button" id="btnDescartar">
+                         Descartar Registro
+                    </button>
+                    <button type="button" id="btnGuardar">
+                         Guardar Borrador
+                    </button>
+                    <button type="submit" id="btnRegistrar">
+                         Registrar y Crear Usuario
+                    </button>
+                </div>
+            </form>
+        </section>
+    </main>
+    <script src="../js/usuario.js"></script>
+</body>
+</html>

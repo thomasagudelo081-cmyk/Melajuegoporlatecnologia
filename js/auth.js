@@ -18,7 +18,8 @@ const Auth = (() => {
 
     const ROLES = {
         ADMIN: "administrador",
-        DOCENTE: "docente"
+        DOCENTE: "docente",
+        ESTUDIANTE: "estudiante"
     };
 
     // Raíz del proyecto, calculada desde la ubicación de este script
@@ -29,7 +30,8 @@ const Auth = (() => {
     const RUTAS = {
         login: RAIZ + "html/registro.html",
         [ROLES.ADMIN]: RAIZ + "admin/html/Ges_Universidad.html",
-        [ROLES.DOCENTE]: RAIZ + "docente/html/gruposA.html"
+        [ROLES.DOCENTE]: RAIZ + "docente/html/gruposA.html",
+        [ROLES.ESTUDIANTE]: RAIZ + "estudiante/html/Perfil_E.html"
     };
 
     // ------------------------------------------------------------------
@@ -47,6 +49,12 @@ const Auth = (() => {
             contrasena: "docente123",
             nombre: "Prof. Carlos Rivera",
             rol: ROLES.DOCENTE
+        },
+        {
+            correo: "estudiante@institucion.edu",
+            contrasena: "estudiante123",
+            nombre: "estdian. thomas Agudelo",
+            rol: ROLES.ESTUDIANTE
         }
     ];
 

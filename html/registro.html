@@ -40,6 +40,7 @@
                 Ingrese sus credenciales institucionales para acceder al sistema.
             </p>
             <form id="formRegistro">
+                <p id="mensajeError" class="mensaje-error" hidden></p>
                 <div class="campo-acceso">
                     <label for="tipoUsuario">
                         Tipo de Usuario
@@ -47,9 +48,6 @@
                     <select id="tipoUsuario">
                         <option value="">
                             Seleccione un usuario
-                        </option>
-                        <option value="estudiante">
-                            Estudiante
                         </option>
                         <option value="docente">
                             Docente
@@ -98,6 +96,7 @@
             </form>
         </section>
     </main>
-    <script src="../js/validacion.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/login.js"></script>
 </body>
 </html>

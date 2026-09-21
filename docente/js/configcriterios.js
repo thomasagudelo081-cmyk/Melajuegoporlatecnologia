@@ -27,11 +27,7 @@ const CriteriosModulo = (() => {
         totalPorcentaje: document.getElementById('totalPorcentaje'),
         tablaNotas: document.getElementById('tablaNotas'),
         globalSearch: document.getElementById('globalSearch'),
-        btnExportar: document.querySelector("button[onclick*='exportarPlanilla']"),
-        btnGuardar: document.querySelector("button[onclick*='guardarBorrador']"),
-        btnEnviar: document.querySelector("button[onclick*='enviarCoordinacion']"),
-        btnNotificaciones: document.querySelector("button[onclick*='notificaciones']"),
-        btnConfiguracion: document.querySelector("button[onclick*='configuracion']")
+        botonesAccion: document.querySelectorAll('[data-accion]')
     };
 
     // ------------------------------------------------------------------
@@ -120,7 +116,7 @@ const CriteriosModulo = (() => {
 
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td>${nombre}</td>
+            <td></td>
             <td class="text-center">${porcentaje}%</td>
             <td class="text-right">
                 <button class="btn-delete" type="button">
@@ -129,6 +125,7 @@ const CriteriosModulo = (() => {
             </td>
         `;
 
+        tr.cells[0].textContent = nombre; // textContent evita inyectar HTML
         DOM.tbodyCriterios.appendChild(tr);
         DOM.formCriterio.reset();
         recalcularTotalPorcentaje();
@@ -185,12 +182,11 @@ const CriteriosModulo = (() => {
             DOM.globalSearch.addEventListener('keyup', filtrarTablaEstudiantes);
         }
 
-        // Eventos para botones de la barra superior y acciones
-        if (DOM.btnExportar) DOM.btnExportar.addEventListener('click', accionesPlanilla.exportar);
-        if (DOM.btnGuardar) DOM.btnGuardar.addEventListener('click', accionesPlanilla.guardarBorrador);
-        if (DOM.btnEnviar) DOM.btnEnviar.addEventListener('click', accionesPlanilla.enviarCoordinacion);
-        if (DOM.btnNotificaciones) DOM.btnNotificaciones.addEventListener('click', accionesPlanilla.notificaciones);
-        if (DOM.btnConfiguracion) DOM.btnConfiguracion.addEventListener('click', accionesPlanilla.configuracion);
+        // Botones de acción (data-accion="exportar", "guardarBorrador", ...)
+        DOM.botonesAccion.forEach(boton => {
+            const accion = accionesPlanilla[boton.dataset.accion];
+            if (accion) boton.addEventListener("click", accion);
+        });
     };
 
     return {

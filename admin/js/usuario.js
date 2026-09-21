@@ -1,14 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
     // =========================================
-    // VERIFICAR PERMISOS DE ADMINISTRADOR
-    // =========================================
-    let tipoUsuario = sessionStorage.getItem("tipoUsuario");
-    if (tipoUsuario !== "administrador") {
-        alert("Acceso denegado. Solo los administradores pueden ingresar.");
-        window.location.href = "../../html/Registro.html";
-        return;
-    }
-    // =========================================
     // VARIABLES DEL FORMULARIO
     // =========================================
     let formulario = document.getElementById("formUsuario");
@@ -138,15 +129,13 @@ document.addEventListener("DOMContentLoaded", function () {
             cambioClave: cambioClave,
             notificarCorreo: notificarCorreo
         };
-        // GUARDAR TEMPORALMENTE
-        sessionStorage.setItem(
-            "usuarioCreado",
-            JSON.stringify(usuario)
-        );
+        // GUARDAR EN EL ALMACÉN (la contraseña no se persiste: el acceso real lo gestionará el backend)
+        delete usuario.contrasena;
+        Almacen.agregar("usuarios", usuario);
 
         console.log("Usuario creado:", usuario);
         alert("Usuario registrado correctamente.");
-        window.location.href = "PanelAdmin.html";
+        window.location.href = "Ges_Universidad.html";
     });
     // =========================================
     // GUARDAR BORRADOR
@@ -194,19 +183,4 @@ document.addEventListener("DOMContentLoaded", function () {
     btnCargaMasiva.addEventListener("click", function () {
         alert("La carga masiva mediante CSV estará disponible próximamente.");
     });
-    // ========================================
-    // CERRAR SESIÓN
-    // =========================================
-    let btnCerrarSesion =
-        document.getElementById("btnCerrarSesion");
-    if (btnCerrarSesion) {
-        btnCerrarSesion.addEventListener("click", function (evento) {
-            evento.preventDefault();
-            sessionStorage.removeItem("tipoUsuario");
-            sessionStorage.removeItem("usuarioCreado");
-            sessionStorage.removeItem("borradorUsuario");
-            alert("Sesión cerrada correctamente.");
-            window.location.href = "../../html/Registro.html";
-        });
-    }
 });

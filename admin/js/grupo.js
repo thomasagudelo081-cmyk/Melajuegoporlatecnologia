@@ -1,14 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
     // =========================================
-    // VERIFICAR PERMISOS
-    // =========================================
-    let tipoUsuario = sessionStorage.getItem("tipoUsuario");
-    if (tipoUsuario !== "administrador") {
-        alert("Acceso denegado. Solo los administradores pueden ingresar.");
-        window.location.href = "../../html/Registro.html";
-        return;
-    }
-    // =========================================
     // FORMULARIO DE GRUPO
     // =========================================
     let formulario = document.getElementById("formGrupo");
@@ -62,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // GUARDAR DATOS TEMPORALMENTE
+        // GUARDAR EN EL ALMACÉN
         let grupo = {
             codigo: codigoGrupo,
             periodo: periodo,
@@ -72,23 +63,8 @@ document.addEventListener("DOMContentLoaded", function () {
             aula: aula
         };
 
-        sessionStorage.setItem("grupoCreado", JSON.stringify(grupo));
+        Almacen.agregar("grupos", grupo);
         alert("Grupo guardado correctamente.");
-        window.location.href = "PanelAdmin.html";
+        window.location.href = "Ges_Universidad.html";
     });
-    // =========================================
-    // CERRAR SESIÓN
-    // =========================================
-    let btnCerrarSesion =
-        document.getElementById("btnCerrarSesion");
-
-    if (btnCerrarSesion) {
-        btnCerrarSesion.addEventListener("click", function (evento) {
-            evento.preventDefault();
-            sessionStorage.removeItem("tipoUsuario");
-            sessionStorage.removeItem("grupoCreado");
-            alert("Sesión cerrada correctamente.");
-            window.location.href = "../../html/Registro.html";
-        });
-    }
 });

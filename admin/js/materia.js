@@ -1,29 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // ==========================================
-    // 1. VERIFICACIÓN DE ROLES
-    // ==========================================
-    let rolUsuario = sessionStorage.getItem("rolUsuario");
-    let rolesPermitidos = [
-        "estudiante",
-        "profesor",
-        "administrador"
-    ];
-
-    // Verificar si existe un rol válido
-    if (!rolesPermitidos.includes(rolUsuario)) {
-        alert("No existe una sesión válida.");
-        window.location.href = "Registro.html";
-        return;
-    }
-
-    // Solo el administrador puede acceder
-    if (rolUsuario !== "administrador") {
-        alert(
-            "Acceso denegado. Solo el administrador puede gestionar materias."
-        );
-        window.location.href = "PanelAdmin.html";
-        return;
-    }
 
     // ==========================================
     // 2. VARIABLES DE LOS ELEMENTOS HTML
@@ -41,11 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let codigoEditando = null;
 
     // ==========================================
-    // 3. OBTENER MATERIAS DEL LOCALSTORAGE
+    // 3. OBTENER MATERIAS DEL ALMACÉN
     // ==========================================
-    let materias = JSON.parse(
-        localStorage.getItem("materias")
-    ) || [];
+    let materias = Almacen.obtener("materias");
 
     // ==========================================
     // 4. CARGAR MATERIAS INICIALES
@@ -83,10 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         ];
 
-        localStorage.setItem(
-            "materias",
-            JSON.stringify(materias)
-        );
+        Almacen.guardar("materias", materias);
     }
 
     // ==========================================
@@ -279,10 +249,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // ==========================================
         // GUARDAR CAMBIOS
         // ==========================================
-        localStorage.setItem(
-            "materias",
-            JSON.stringify(materias)
-        );
+        Almacen.guardar("materias", materias);
         console.log("Materias registradas:", materias);
         formulario.reset();
         codigoEditando = null;

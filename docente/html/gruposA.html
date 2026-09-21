@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Academia Pro - Mis Grupos Asignados</title>
+    <link rel="stylesheet" href="../css/gruposA.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Sidebar Navigation -->
@@ -27,6 +30,12 @@
         </li>
         <li id="nav-settings">
             <a onclick="onNavClick('Configuración')"><i class="fa-solid fa-gear"></i> <span>Configuración</span></a>
+        </li>
+        <li id="nav-grades">
+            <a href="calycriterios.html"><i class="fa-solid fa-sliders"></i> <span>Calificaciones y Criterios</span></a>
+        </li>
+        <li id="nav-logout">
+            <a href="#" id="btnCerrarSesion"><i class="fa-solid fa-right-from-bracket"></i> <span>Cerrar Sesión</span></a>
         </li>
     </ul>
 </aside>
@@ -69,7 +78,7 @@
                     <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">
                         SGA ACADÉMICO • PORTAL DOCENTE <span class="role-badge">Profesor Titular</span>
                     </div>
-                    <h1 style="font-size: 1.25rem; font-weight: 700; color: var(--primary-dark);">Prof. Carlos Rivera</h1>
+                    <h1 data-usuario-nombre style="font-size: 1.25rem; font-weight: 700; color: var(--primary-dark);">Prof. Carlos Rivera</h1>
                 </div>
             </div>
 
@@ -523,7 +532,7 @@
         }, 3000);
     }
 </script>
- <link rel="stylesheet" href="../css/gruposA.css">
- <script src="../js/gruposA.js" defer></script>
+<script src="../../js/auth.js" data-rol="docente"></script>
+<script src="../js/gruposA.js" defer></script>
 </body>
 </html>

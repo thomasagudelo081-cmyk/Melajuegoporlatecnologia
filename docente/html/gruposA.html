@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+<aside class="sidebar">
+    <div class="sidebar-brand">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>Academia Pro</span>
+    </div>
+    <ul class="sidebar-menu">
+        <li class="active" id="nav-dashboard">
+            <a onclick="onNavClick('Dashboard')"><i class="fa-solid fa-chart-pie"></i> <span>Dashboard</span></a>
+        </li>
+        <li id="nav-courses">
+            <a onclick="onNavClick('Mis Cursos')"><i class="fa-solid fa-book"></i> <span>Mis Cursos</span></a>
+        </li>
+        <li id="nav-students">
+            <a onclick="onNavClick('Estudiantes')"><i class="fa-solid fa-users"></i> <span>Estudiantes</span></a>
+        </li>
+        <li id="nav-reports">
+            <a onclick="onNavClick('Reportes')"><i class="fa-solid fa-file-lines"></i> <span>Reportes</span></a>
+        </li>
+        <li id="nav-settings">
+            <a onclick="onNavClick('Configuración')"><i class="fa-solid fa-gear"></i> <span>Configuración</span></a>
+        </li>
+    </ul>
+</aside>
+
+<!-- Main Wrapper -->
+<div class="main-wrapper">
+    
+    <!-- Top Navbar -->
+    <header class="top-header">
+        <div class="search-global">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="globalSearchInput" placeholder="Buscar matrícula, estudiante o asignatura..." oninput="onGlobalSearch(this.value)">
+        </div>
+        
+        <div class="header-actions">
+            <button class="icon-btn" title="Ayuda" onclick="onHelpClick()"><i class="fa-regular fa-circle-question"></i></button>
+            <button class="icon-btn" title="Notificaciones" onclick="onNotificationClick()">
+                <i class="fa-regular fa-bell"></i>
+                <span class="badge"></span>
+            </button>
+            
+            <div class="user-profile" onclick="onUserProfileClick()">
+                <div class="avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="content">
+
+        <!-- Sub-Header Info -->
+        <div class="page-header-info">
+            <div class="user-title-box">
+                <div style="background-color: #dbeafe; padding: 10px; border-radius: 8px; color: #1e40af;">
+                    <i class="fa-solid fa-id-card fa-lg"></i>
+                </div>
+                <div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">
+                        SGA ACADÉMICO • PORTAL DOCENTE <span class="role-badge">Profesor Titular</span>
+                    </div>
+                    <h1 style="font-size: 1.25rem; font-weight: 700; color: var(--primary-dark);">Prof. Carlos Rivera</h1>
+                </div>
+            </div>
+
+            <div class="top-action-btns">
+                <button class="btn btn-light" onclick="onSelectSemester()"><i class="fa-regular fa-calendar"></i> Semestre Vigente</button>
+                <button class="btn btn-navy" id="syncBtn" onclick="onSyncData()"><i class="fa-solid fa-arrows-rotate"></i> Sincronizar</button>
+            </div>
+        </div>
+
+        <!-- Urgent Alert Banner -->
+        <div class="alert-banner">
+            <div class="alert-content">
+                <div class="alert-icon">
+                    <i class="fa-solid fa-bell"></i>
+                </div>
+                <div>
+                    <strong>Atención: Cierre Académico Próximo</strong><br>
+                    <span style="font-size: 0.8rem;">Recuerde que el plazo límite para el cierre del segundo corte vence el <strong>15 de Noviembre a las 23:59 hrs.</strong></span>
+                </div>
+            </div>
+            <div class="timer-badge">
+                Quedan 5 días
+            </div>
+        </div>
+
+        <!-- Dashboard Hero Banner -->
+        <section class="hero-banner">
+            <div class="hero-info">
+                <div class="hero-tag"><i class="fa-solid fa-graduation-cap"></i> PERÍODO ACADÉMICO 2024-I</div>
+                <h2>Gestión de Cursos Asignados</h2>
+                <p>Consulte el progreso de evaluaciones, registre notas parciales y valide las actas finales previo al envío a Coordinación de Ciencias Básicas.</p>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <div class="stat-label">TOTAL GRUPOS <i class="fa-regular fa-copy"></i></div>
+                    <div class="stat-value">04</div>
+                    <div class="stat-label">Cursos activos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">ESTUDIANTES <i class="fa-solid fa-user-group"></i></div>
+                    <div class="stat-value">128</div>
+                    <div class="stat-label">Matriculados</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">PROMEDIO <i class="fa-solid fa-chart-line"></i></div>
+                    <div class="stat-value">4.12 <span style="font-size:0.8rem; color:#94a3b8;">/ 5.0</span></div>
+                    <div class="stat-sub">+0.18 vs 2023-II</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filters Bar -->
+        <div class="filter-bar">
+            <div class="filter-controls">
+                <input type="text" id="courseSearch" class="filter-input" placeholder="Buscar por código (ej. MAT-201)" onkeyup="onSearchCourses()">
+                
+                <select class="filter-select" id="jornadaFilter" onchange="onSearchCourses()">
+                    <option value="">Todas las Jornadas</option>
+                    <option value="Mañana">Mañana</option>
+                    <option value="Tarde">Tarde</option>
+                </select>
+
+                <select class="filter-select" id="semestreFilter" onchange="onSearchCourses()">
+                    <option value="">Todos los Semestres</option>
+                    <option value="Semestre 1">Semestre 1</option>
+                    <option value="Semestre 2">Semestre 2</option>
+                    <option value="Semestre 3">Semestre 3</option>
+                    <option value="Semestre 4">Semestre 4</option>
+                </select>
+            </div>
+            <div class="group-count">
+                Mostrando: <strong id="visibleCount" style="color: var(--primary-dark);">4</strong> grupos
+            </div>
+        </div>
+
+        <!-- Courses Grid Layout -->
+        <div class="course-grid" id="courseGrid">
+            
+            <!-- Card 1: Cálculo Diferencial -->
+            <div class="course-card" data-code="MAT-201" data-semester="Semestre 2" data-jornada="Mañana">
+                <div>
+                    <div class="card-header">
+                        <div>
+                            <span class="course-code-tag">MAT-201</span>
+                            <span class="semester-tag">Semestre 2</span>
+                        </div>
+                        <i class="fa-solid fa-sigma course-icon"></i>
+                    </div>
+                    <h3 class="course-title">Cálculo Diferencial</h3>
+                    <div class="group-name">Grupo 02</div>
+
+                    <div class="course-details">
+                        <div class="detail-item"><i class="fa-solid fa-users"></i> <strong>32</strong> Estudiantes</div>
+                        <div class="detail-item"><i class="fa-regular fa-clock"></i> Lun y Mié 08:00 - 10:00</div>
+                        <div class="detail-item"><i class="fa-solid fa-location-dot"></i> Aula 302 • Edificio B (Campus Central)</div>
+                    </div>
+
+                    <div class="status-box progress">
+                        <div style="display: flex; justify-content: space-between; font-weight: 600;">
+                            <span>Calificaciones al 60%</span>
+                            <span style="color: #854d0e;">Corte 1 & 2 listos</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" style="width: 60%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-actions">
+                    <button class="btn btn-light" onclick="onManageCriteria('MAT-201', 'Cálculo Diferencial')">Gestionar Criterios</button>
+                    <button class="btn btn-navy" onclick="onEnterGrades('MAT-201', 'Cálculo Diferencial')"><i class="fa-solid fa-pen-to-square"></i> Ingresar Notas</button>
+                </div>
+            </div>
+
+            <!-- Card 2: Álgebra Lineal -->
+            <div class="course-card" data-code="MAT-102" data-semester="Semestre 1" data-jornada="Mañana">
+                <div>
+                    <div class="card-header">
+                        <div>
+                            <span class="course-code-tag">MAT-102</span>
+                            <span class="semester-tag">Semestre 1</span>
+                        </div>
+                        <i class="fa-solid fa-table-cells course-icon"></i>
+                    </div>
+                    <h3 class="course-title">Álgebra Lineal</h3>
+                    <div class="group-name">Grupo 01</div>
+
+                    <div class="course-details">
+                        <div class="detail-item"><i class="fa-solid fa-users"></i> <strong>35</strong> Estudiantes</div>
+                        <div class="detail-item"><i class="fa-regular fa-clock"></i> Mar y Jue 10:00 - 12:00</div>
+                        <div class="detail-item"><i class="fa-solid fa-location-dot"></i> Aula 104 • Pabellón A</div>
+                    </div>
+
+                    <div class="status-box warning">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span><i class="fa-solid fa-file-circle-exclamation"></i> <strong>Planilla sin enviar</strong></span>
+                            <span style="font-weight: 700; font-size: 0.75rem;">Pendiente</span>
+                        </div>
+                        <p style="font-size: 0.75rem; margin-top: 4px; opacity: 0.9;">Tiene notas guardadas en borrador pendientes de publicar.</p>
+                    </div>
+                </div>
+
+                <div class="card-actions">
+                    <button class="btn btn-navy" style="width: 100%;" onclick="onEnterGrades('MAT-102', 'Álgebra Lineal')"><i class="fa-solid fa-pen-to-square"></i> Ingresar Calificaciones</button>
+                </div>
+            </div>
+
+            <!-- Card 3: Métodos Numéricos -->
+            <div class="course-card" data-code="MAT-305" data-semester="Semestre 4" data-jornada="Tarde">
+                <div>
+                    <div class="card-header">
+                        <div>
+                            <span class="course-code-tag">MAT-305</span>
+                            <span class="semester-tag">Semestre 4</span>
+                        </div>
+                        <i class="fa-solid fa-laptop-code course-icon"></i>
+                    </div>
+                    <h3 class="course-title">Métodos Numéricos</h3>
+                    <div class="group-name">Grupo 03</div>
+
+                    <div class="course-details">
+                        <div class="detail-item"><i class="fa-solid fa-users"></i> <strong>28</strong> Estudiantes</div>
+                        <div class="detail-item"><i class="fa-regular fa-clock"></i> Viernes 14:00 - 18:00</div>
+                        <div class="detail-item"><i class="fa-solid fa-location-dot"></i> Laboratorio C-2 • Centro de Cómputo</div>
+                    </div>
+
+                    <div class="status-box success">
+                        <div style="display: flex; justify-content: space-between; font-weight: 600; margin-bottom: 4px;">
+                            <span><i class="fa-regular fa-circle-check"></i> Actas Listas para Envío</span>
+                            <span>100% Evaluado</span>
+                        </div>
+                        <p style="font-size: 0.75rem; color: #1e3a8a;">Cierre consolidado. Puede generar el reporte final firmado.</p>
+                    </div>
+                </div>
+
+                <div class="card-actions">
+                    <button class="btn btn-light" style="width: 100%;" onclick="onViewRecords('MAT-305', 'Métodos Numéricos')"><i class="fa-regular fa-file-pdf"></i> Ver Actas</button>
+                </div>
+            </div>
+
+            <!-- Card 4: Ecuaciones Diferenciales -->
+            <div class="course-card" data-code="MAT-204" data-semester="Semestre 3" data-jornada="Tarde">
+                <div>
+                    <div class="card-header">
+                        <div>
+                            <span class="course-code-tag">MAT-204</span>
+                            <span class="semester-tag">Semestre 3</span>
+                        </div>
+                        <i class="fa-solid fa-square-root-variable course-icon"></i>
+                    </div>
+                    <h3 class="course-title">Ecuaciones Diferenciales</h3>
+                    <div class="group-name">Grupo 01</div>
+
+                    <div class="course-details">
+                        <div class="detail-item"><i class="fa-solid fa-users"></i> <strong>33</strong> Estudiantes</div>
+                        <div class="detail-item"><i class="fa-regular fa-clock"></i> Lun y Mié 14:00 - 16:00</div>
+                        <div class="detail-item"><i class="fa-solid fa-location-dot"></i> Aula 201 • Facultad de Ingeniería</div>
+                    </div>
+
+                    <div class="status-box neutral">
+                        <div style="display: flex; justify-content: space-between; font-weight: 600;">
+                            <span>● Al día</span>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">Sin pendientes inmediatos</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" style="width: 80%; background-color: var(--primary-dark);"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-actions">
+                    <button class="btn btn-light" onclick="onManageCriteria('MAT-204', 'Ecuaciones Diferenciales')">Criterios</button>
+                    <button class="btn btn-navy" onclick="onViewRecords('MAT-204', 'Ecuaciones Diferenciales')"><i class="fa-solid fa-list-check"></i> Ver Registro</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer Help Banner -->
+        <footer class="footer-banner">
+            <div class="help-info">
+                <div class="help-icon">
+                    <i class="fa-regular fa-circle-question fa-lg"></i>
+                </div>
+                <div>
+                    <strong style="font-size: 0.95rem;">¿Inconvenientes con el registro de calificaciones?</strong>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">Contacte al departamento de Registro y Control Académico o descargue el manual de docente.</p>
+                </div>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-light" onclick="onDownloadGuide()"><i class="fa-solid fa-file-arrow-down"></i> Guía Rápida</button>
+                <button class="btn btn-navy" onclick="onOpenSupport()"><i class="fa-solid fa-headset"></i> Soporte</button>
+            </div>
+        </footer>
+
+    </main>
+</div>
+
+<!-- Modal Interactivo -->
+<div class="modal-overlay" id="actionModal">
+    <div class="modal-container">
+        <div class="modal-header">
+            <h3 id="modalTitle" class="modal-title-text">Acción del Curso</h3>
+            <button class="icon-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body" id="modalBody" style="font-size: 0.9rem; color: var(--text-main); margin-bottom: 20px;">
+            <p id="modalDescription">Cargando información...</p>
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 10px;" id="modalFooter">
+            <button class="btn btn-light" onclick="closeModal()">Cancelar</button>
+            <button class="btn btn-primary" id="modalConfirmBtn" onclick="onModalConfirm()">Aceptar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Toast Notifications Container -->
+<div id="toastContainer"></div>
+
+<!-- JavaScript Interno -->
+<script>
+    let currentModalAction = null;
+
+    // 1. Filtrado de Cursos
+    function onSearchCourses() {
+        const searchValue = document.getElementById('courseSearch').value.toLowerCase().trim();
+        const selectedSemestre = document.getElementById('semestreFilter').value;
+        const selectedJornada = document.getElementById('jornadaFilter').value;
+        
+        const cards = document.querySelectorAll('.course-card');
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+            const code = card.getAttribute('data-code').toLowerCase();
+            const title = card.querySelector('.course-title').innerText.toLowerCase();
+            const semester = card.getAttribute('data-semester');
+            const jornada = card.getAttribute('data-jornada');
+
+            const matchesSearch = code.includes(searchValue) || title.includes(searchValue);
+            const matchesSemester = selectedSemestre === '' || semester === selectedSemestre;
+            const matchesJornada = selectedJornada === '' || jornada === selectedJornada;
+
+            if (matchesSearch && matchesSemester && matchesJornada) {
+                card.style.display = 'flex';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        document.getElementById('visibleCount').innerText = visibleCount;
+    }
+
+    function onGlobalSearch(query) {
+        if (query.trim().length > 0) {
+            document.getElementById('courseSearch').value = query;
+            onSearchCourses();
+        }
+    }
+
+    // 2. Acciones del Curso
+    function onEnterGrades(courseId, courseTitle) {
+        openCustomModal({
+            title: `Ingresar Notas - ${courseTitle} (${courseId})`,
+            content: `
+                <p style="margin-bottom: 12px;">Seleccione el corte de evaluación:</p>
+                <select id="modalCorteSelect" style="width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--border-color); margin-bottom: 12px;">
+                    <option value="1">Corte 1 (30%)</option>
+                    <option value="2">Corte 2 (30%)</option>
+                    <option value="3">Corte Final (40%)</option>
+                </select>
+                <div style="background-color: #f1f5f9; padding: 10px; border-radius: 6px; font-size: 0.8rem; color: #475569;">
+                    <i class="fa-solid fa-circle-info"></i> Notas de borrador con autoguardado habilitado.
+                </div>
+            `,
+            onConfirm: () => {
+                const corte = document.getElementById('modalCorteSelect').value;
+                showToast(`Cargando matriz del Corte ${corte} para ${courseTitle}`);
+            }
+        });
+    }
+
+    function onManageCriteria(courseId, courseTitle) {
+        openCustomModal({
+            title: `Criterios de Evaluación - ${courseTitle}`,
+            content: `
+                <p style="margin-bottom: 10px;">Ajuste de porcentajes:</p>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+                    <li style="display: flex; justify-content: space-between; align-items: center;">
+                        <span>Exámenes Parciales:</span>
+                        <input type="number" value="50" style="width: 70px; padding: 4px; border-radius: 4px; border: 1px solid #ccc; text-align: center;"> %
+                    </li>
+                    <li style="display: flex; justify-content: space-between; align-items: center;">
+                        <span>Talleres y Quiz:</span>
+                        <input type="number" value="30" style="width: 70px; padding: 4px; border-radius: 4px; border: 1px solid #ccc; text-align: center;"> %
+                    </li>
+                    <li style="display: flex; justify-content: space-between; align-items: center;">
+                        <span>Proyecto Final:</span>
+                        <input type="number" value="20" style="width: 70px; padding: 4px; border-radius: 4px; border: 1px solid #ccc; text-align: center;"> %
+                    </li>
+                </ul>
+            `,
+            onConfirm: () => {
+                showToast(`Criterios guardados correctamente para ${courseId}`);
+            }
+        });
+    }
+
+    function onViewRecords(courseId, courseTitle) {
+        openCustomModal({
+            title: `Acta Oficial - ${courseTitle}`,
+            content: `
+                <p style="margin-bottom: 12px;">Previsualización del resumen de notas para <strong>${courseId}</strong>.</p>
+                <div style="border: 1px dashed var(--border-color); padding: 12px; border-radius: 6px; text-align: center; background-color: #fafafa;">
+                    <i class="fa-solid fa-file-pdf fa-2x" style="color: #dc2626; margin-bottom: 6px;"></i>
+                    <p style="font-size: 0.85rem; font-weight: 600;">Acta_Final_${courseId}_2024-I.pdf</p>
+                </div>
+            `,
+            onConfirm: () => {
+                showToast(`Descargando Acta PDF de ${courseId}...`);
+            }
+        });
+    }
+
+    // 3. Controles Principales
+    function onSyncData() {
+        const btn = document.getElementById('syncBtn');
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sincronizando...';
+        btn.disabled = true;
+
+        setTimeout(() => {
+            btn.innerHTML = '<i class="fa-solid fa-arrows-rotate"></i> Sincronizar';
+            btn.disabled = false;
+            showToast("¡Sincronización completada con éxito!");
+        }, 1200);
+    }
+
+    function onSelectSemester() {
+        openCustomModal({
+            title: "Cambiar Período Académico",
+            content: `
+                <select id="semesterSelect" style="width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--border-color);">
+                    <option value="2024-I" selected>2024 - Primer Semestre (Vigente)</option>
+                    <option value="2023-II">2023 - Segundo Semestre</option>
+                </select>
+            `,
+            onConfirm: () => {
+                const selected = document.getElementById('semesterSelect').value;
+                showToast(`Cambio al período ${selected}`);
+            }
+        });
+    }
+
+    function onNavClick(menuName) {
+        const items = document.querySelectorAll('.sidebar-menu li');
+        items.forEach(el => el.classList.remove('active'));
+        event.currentTarget.parentElement.classList.add('active');
+        showToast(`Navegando a: ${menuName}`);
+    }
+
+    function onDownloadGuide() {
+        showToast("Descargando Manual_Docente.pdf...");
+    }
+
+    function onOpenSupport() {
+        openCustomModal({
+            title: "Soporte Técnico",
+            content: `
+                <textarea placeholder="Escriba su consulta aquí..." style="width: 100%; height: 80px; padding: 8px; border-radius: 6px; border: 1px solid var(--border-color);"></textarea>
+            `,
+            onConfirm: () => {
+                showToast("Ticket enviado al Soporte de TI.");
+            }
+        });
+    }
+
+    function onNotificationClick() { showToast("Sin notificaciones pendientes."); }
+    function onHelpClick() { showToast("Abriendo Centro de Ayuda..."); }
+    function onUserProfileClick() { showToast("Prof. Carlos Rivera - Dpto. Ciencias Básicas"); }
+
+    // 4. Modales y Toasts
+    function openCustomModal({ title, content, onConfirm }) {
+        document.getElementById('modalTitle').innerText = title;
+        document.getElementById('modalBody').innerHTML = content;
+        currentModalAction = onConfirm;
+        document.getElementById('actionModal').classList.add('active');
+    }
+
+    function closeModal() {
+        document.getElementById('actionModal').classList.remove('active');
+        currentModalAction = null;
+    }
+
+    function onModalConfirm() {
+        if (typeof currentModalAction === 'function') {
+            currentModalAction();
+        }
+        closeModal();
+    }
+
+    function showToast(message) {
+        const container = document.getElementById('toastContainer');
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #4ade80;"></i> <span>${message}</span>`;
+        
+        container.appendChild(toast);
+
+        setTimeout(() => {
+            toast.remove();
+        }, 3000);
+    }
+</script>
+ <link rel="stylesheet" href="../css/gruposA.css">
+ <script src="../js/gruposA.js" defer></script>
+</body>
+</html>

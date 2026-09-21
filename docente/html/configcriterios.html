@@ -1,0 +1,321 @@
+<!-- configcreterios.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academia Pro - Configuración de Criterios y Calificaciones</title>
+    <!-- CSS Externo -->
+    <link rel="stylesheet" href="configcreterios.css">
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="layout">
+        <!-- BARRA LATERAL (SIDEBAR) -->
+        <aside class="sidebar">
+            <div class="brand">
+                <i class="fa-solid fa-graduation-cap brand-icon"></i>
+                <div class="brand-text">
+                    <h2>Academia Pro</h2>
+                    <span>Portal Docente</span>
+                </div>
+            </div>
+
+            <div class="user-card">
+                <div class="user-avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <h4>Prof. Carlos Rivera</h4>
+                    <span class="badge-role">Profesor Titular</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="gruposA.html" class="nav-item">
+                    <i class="fa-solid fa-table-cells-large"></i>
+                    <span>Gestión de Cursos</span>
+                </a>
+                <a href="#" class="nav-item active">
+                    <i class="fa-solid fa-sliders"></i>
+                    <span>Ingreso de Calificaciones</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="main-content">
+            <!-- BARRA SUPERIOR (HEADER) -->
+            <header class="top-header">
+                <div class="header-title">
+                    <h1>Academia Pro <span>| Portal Docente</span></h1>
+                </div>
+                
+                <div class="header-actions">
+                    <div class="search-bar">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="globalSearch" placeholder="Buscar estudiante o grupo..." onkeyup="filtrarTablaEstudiantes()">
+                    </div>
+                    <button class="btn-icon" onclick="notificaciones()"><i class="fa-regular fa-bell"></i></button>
+                    <button class="btn-icon" onclick="configuracion()"><i class="fa-solid fa-gear"></i></button>
+                    <div class="avatar-sm">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100" alt="Avatar">
+                    </div>
+                </div>
+            </header>
+
+            <!-- TÍTULO DE LA SECCIÓN -->
+            <section class="page-title-section">
+                <h2>Configuración de Criterios y Calificaciones</h2>
+                <p class="subtitle">
+                    <strong>Asignatura:</strong> Algoritmos y Estructuras de Datos (CS201) | 
+                    <strong>Grupo:</strong> A | 
+                    <strong>Periodo:</strong> 2024-1
+                </p>
+            </section>
+
+            <!-- SECCIÓN 1: CRITERIOS DE EVALUACIÓN -->
+            <section class="card shadow-sm">
+                <div class="card-header">
+                    <h3><i class="fa-solid fa-sliders"></i> Criterios de Evaluación</h3>
+                </div>
+                <div class="card-body">
+                    <form id="formCriterio" class="criterio-form" onsubmit="agregarCriterio(event)">
+                        <div class="form-group flex-grow">
+                            <label for="nombreCriterio">Nombre del Criterio</label>
+                            <input type="text" id="nombreCriterio" placeholder="Ej. Examen Parcial 1" required>
+                        </div>
+                        <div class="form-group w-30">
+                            <label for="porcentajeCriterio">Porcentaje (%)</label>
+                            <input type="number" id="porcentajeCriterio" min="1" max="100" placeholder="0-100" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-add">
+                            <i class="fa-solid fa-plus"></i> Añadir
+                        </button>
+                    </form>
+
+                    <!-- TABLA DE CRITERIOS -->
+                    <div class="table-responsive mt-3">
+                        <table class="table" id="tablaCriterios">
+                            <thead>
+                                <tr>
+                                    <th>Criterio</th>
+                                    <th class="text-center">Peso (%)</th>
+                                    <th class="text-right">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyCriterios">
+                                <tr>
+                                    <td>Tareas y Trabajos</td>
+                                    <td class="text-center">30%</td>
+                                    <td class="text-right"><button class="btn-delete" onclick="eliminarCriterio(this)"><i class="fa-solid fa-trash-can"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td>Examen Parcial</td>
+                                    <td class="text-center">30%</td>
+                                    <td class="text-right"><button class="btn-delete" onclick="eliminarCriterio(this)"><i class="fa-solid fa-trash-can"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td>Proyecto Final</td>
+                                    <td class="text-center">40%</td>
+                                    <td class="text-right"><button class="btn-delete" onclick="eliminarCriterio(this)"><i class="fa-solid fa-trash-can"></i></button></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr class="footer-row">
+                                    <td class="text-right font-weight-bold">Total Asignado:</td>
+                                    <td class="text-center font-weight-bold success-text" id="totalPorcentaje">100%</td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 2: INGRESO DE CALIFICACIONES -->
+            <section class="card shadow-sm mt-4">
+                <div class="card-header flex-between">
+                    <h3><i class="fa-solid fa-pen-to-square"></i> Ingreso de Calificaciones</h3>
+                    <div class="action-buttons">
+                        <button class="btn btn-outline" onclick="exportarPlanilla()">
+                            <i class="fa-solid fa-file-download"></i> Exportar Planilla
+                        </button>
+                        <button class="btn btn-dark" onclick="guardarBorrador()">
+                            <i class="fa-solid fa-floppy-disk"></i> Guardar Borrador
+                        </button>
+                        <button class="btn btn-success" onclick="enviarCoordinacion()">
+                            <i class="fa-solid fa-paper-plane"></i> Enviar a Coordinación
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="tablaNotas">
+                            <thead>
+                                <tr>
+                                    <th>ID Estudiante</th>
+                                    <th>Nombre</th>
+                                    <th class="text-center">Tareas (30%)</th>
+                                    <th class="text-center">Parcial (30%)</th>
+                                    <th class="text-center">Proyecto (40%)</th>
+                                    <th class="text-center">Promedio Final</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-muted">20210045</td>
+                                    <td class="font-weight-medium">Alvarez, Maria</td>
+                                    <td class="text-center"><input type="number" class="grade-input" value="85" min="0" max="100" oninput="calcularPromedioFila(this)"></td>
+                                    <td class="text-center"><input type="number" class="grade-input" value="90" min="0" max="100" oninput="calcularPromedioFila(this)"></td>
+                                    <td class="text-center"><input type="number" class="grade-input" value="95" min="0" max="100" oninput="calcularPromedioFila(this)"></td>
+                                    <td class="text-center font-weight-bold text-success score-cell">90.5</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted">20210112</td>
+                                    <td class="font-weight-medium">Gomez, Carlos</td>
+                                    <td class="text-center"><input type="number" class="grade-input" value="70" min="0" max="100" oninput="calcularPromedioFila(this)"></td>
+                                    <td class="text-center"><input type="number" class="grade-input" value="65" min="0" max="100" oninput="calcularPromedioFila(this)"></td>
+                                    <td class="text-center"><input type="number" class="grade-input" value="80" min="0" max="100" oninput="calcularPromedioFila(this)"></td>
+                                    <td class="text-center font-weight-bold text-warning score-cell">72.5</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted">20210344</td>
+                                    <td class="font-weight-medium">Rojas, Luis</td>
+                                    <td class="text-center"><input type="number" class="grade-input" value="50" min="0" max="100" oninput="calcularPromedioFila(this)"></td>
+                                    <td class="text-center"><input type="number" class="grade-input" value="55" min="0" max="100" oninput="calcularPromedioFila(this)"></td>
+                                    <td class="text-center"><input type="number" class="grade-input" value="60" min="0" max="100" oninput="calcularPromedioFila(this)"></td>
+                                    <td class="text-center font-weight-bold text-danger score-cell">55.5</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- SCRIPT DE FUNCIONALIDADES -->
+    <script>
+        // --- 1. AÑADIR CRITERIO ---
+        function agregarCriterio(e) {
+            e.preventDefault();
+            const nombre = document.getElementById('nombreCriterio').value.trim();
+            const porcentaje = parseInt(document.getElementById('porcentajeCriterio').value);
+
+            if(!nombre || isNaN(porcentaje)) return;
+
+            const tbody = document.getElementById('tbodyCriterios');
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${nombre}</td>
+                <td class="text-center">${porcentaje}%</td>
+                <td class="text-right"><button class="btn-delete" onclick="eliminarCriterio(this)"><i class="fa-solid fa-trash-can"></i></button></td>
+            `;
+            tbody.appendChild(tr);
+
+            document.getElementById('formCriterio').reset();
+            recalcularTotalPorcentaje();
+        }
+
+        // --- 2. ELIMINAR CRITERIO ---
+        function eliminarCriterio(btn) {
+            const row = btn.closest('tr');
+            row.remove();
+            recalcularTotalPorcentaje();
+        }
+
+        // --- 3. RECALCULAR TOTAL ASIGNADO (%) ---
+        function recalcularTotalPorcentaje() {
+            const tbody = document.getElementById('tbodyCriterios');
+            const rows = tbody.querySelectorAll('tr');
+            let total = 0;
+
+            rows.forEach(r => {
+                const cellText = r.cells[1].innerText;
+                const valor = parseInt(cellText.replace('%', ''));
+                if(!isNaN(valor)) total += valor;
+            });
+
+            const totalEl = document.getElementById('totalPorcentaje');
+            totalEl.innerText = `${total}%`;
+
+            if(total === 100) {
+                totalEl.className = 'text-center font-weight-bold success-text';
+            } else {
+                totalEl.className = 'text-center font-weight-bold danger-text';
+            }
+        }
+
+        // --- 4. CALCULAR PROMEDIO DE ESTUDIANTE EN TIEMPO REAL ---
+        function calcularPromedioFila(input) {
+            const tr = input.closest('tr');
+            const inputs = tr.querySelectorAll('.grade-input');
+            
+            // Pesos por defecto: Tareas 30%, Parcial 30%, Proyecto 40%
+            const pesos = [0.30, 0.30, 0.40];
+            let acumulado = 0;
+
+            inputs.forEach((inp, idx) => {
+                let val = parseFloat(inp.value) || 0;
+                acumulado += val * (pesos[idx] || 0);
+            });
+
+            const scoreCell = tr.querySelector('.score-cell');
+            const promedioFinal = acumulado.toFixed(1);
+            scoreCell.innerText = promedioFinal;
+
+            // Cambiar color según la calificación
+            if(promedioFinal >= 85) {
+                scoreCell.className = 'text-center font-weight-bold text-success score-cell';
+            } else if(promedioFinal >= 70) {
+                scoreCell.className = 'text-center font-weight-bold text-warning score-cell';
+            } else {
+                scoreCell.className = 'text-center font-weight-bold text-danger score-cell';
+            }
+        }
+
+        // --- 5. BÚSQUEDA Y FILTRADO ---
+        function filtrarTablaEstudiantes() {
+            const input = document.getElementById('globalSearch').value.toLowerCase();
+            const rows = document.querySelectorAll('#tablaNotas tbody tr');
+
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(input) ? '' : 'none';
+            });
+        }
+
+        // --- 6. ACCIONES DE BOTONES (Puntos de extensión Backend/API) ---
+        function exportarPlanilla() {
+            alert("⚙️ Exportando planilla de calificaciones en formato Excel/PDF...");
+        }
+
+        function guardarBorrador() {
+            alert("💾 Guardado exitoso. La información se ha guardado temporalmente.");
+        }
+
+        function enviarCoordinacion() {
+            const total = parseInt(document.getElementById('totalPorcentaje').innerText);
+            if(total !== 100) {
+                alert("⚠️ Atención: La suma de los criterios debe ser exactamente igual al 100% para enviar la planilla.");
+                return;
+            }
+            alert("🚀 ¡Planilla enviada exitosamente a la Coordinación Académica!");
+        }
+
+        function notificaciones() {
+            alert("🔔 Tienes 2 notificaciones del sistema docente.");
+        }
+
+        function configuracion() {
+            alert("⚙️ Ajustes del sistema.");
+        }
+    </script>
+     <link rel="stylesheet" href="../css/configcriterios.css">
+     <script src="../js/configcriterios.js" defer></script>
+</body>
+</html>

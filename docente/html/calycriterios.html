@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academia Pro - Cálculo Diferencial Grupo 02</title>
+    <!-- CSS Externo -->
+    <link rel="stylesheet" href="calycriterios.css">
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="layout">
+        <!-- BARRA LATERAL (SIDEBAR) -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="brand">
+                    <i class="fa-solid fa-graduation-cap brand-icon"></i>
+                    <div class="brand-text">
+                        <h2>Academia Pro</h2>
+                        <span>Portal Docente</span>
+                    </div>
+                </div>
+                <div class="profesor-badge">Profesor Titular</div>
+
+                <nav class="sidebar-nav">
+                    <a href="gruposA.html" class="nav-item">
+                        <i class="fa-solid fa-table-cells-large"></i>
+                        <span>Mis Grupos Asignados</span>
+                    </a>
+                    <a href="calycriterios.html" class="nav-item active">
+                        <i class="fa-solid fa-sliders"></i>
+                        <span>Calificaciones y Criterios</span>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="sidebar-bottom">
+                <button class="btn-logout" onclick="cerrarSesion()">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Cerrar Sesión</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="main-content">
+            <!-- BARRA SUPERIOR (HEADER) -->
+            <header class="top-header">
+                <div class="header-title">
+                    <span class="sga-label">SGA Académico</span> • <span class="portal-label">Portal Docente</span>
+                </div>
+                
+                <div class="header-actions">
+                    <div class="search-bar">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="globalSearch" placeholder="Buscar grupo o estudiante..." onkeyup="filtrarTablaEstudiantes()">
+                    </div>
+                    <button class="btn-icon" onclick="alert('Notificaciones')"><i class="fa-regular fa-bell"></i></button>
+                    <button class="btn-icon" onclick="alert('Ayuda')"><i class="fa-regular fa-circle-question"></i></button>
+                    <div class="user-profile">
+                        <div class="user-details">
+                            <span class="user-name">Prof. Carlos Rivera</span>
+                            <span class="user-role">Docente Titular</span>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100" alt="Avatar" class="avatar-img">
+                    </div>
+                </div>
+            </header>
+
+            <!-- TITULAR Y ACCIONES PRINCIPALES -->
+            <section class="course-header-section">
+                <div class="course-title-block">
+                    <h1>Cálculo Diferencial - Grupo 02</h1>
+                    <p class="course-meta">Semestre Académico 2024-I • Ingeniería de Sistemas</p>
+                </div>
+                <div class="header-buttons">
+                    <button class="btn btn-outline" onclick="guardarBorrador()">
+                        <i class="fa-solid fa-floppy-disk"></i> Guardar Borrador
+                    </button>
+                    <button class="btn btn-outline" onclick="exportarPlanilla()">
+                        Exportar
+                    </button>
+                    <button class="btn btn-navy" onclick="enviarCoordinacion()">
+                        <i class="fa-solid fa-play"></i> Enviar a Coordinación
+                    </button>
+                </div>
+            </section>
+
+            <!-- GRID PRINCIPAL (DOS COLUMNAS) -->
+            <div class="dashboard-grid">
+                
+                <!-- COLUMNA IZQUIERDA: CRITERIOS DE EVALUACIÓN -->
+                <section class="card criteria-card">
+                    <div class="card-header-flex">
+                        <h3>Criterios de Evaluación</h3>
+                        <div class="total-badge">
+                            <span class="total-percent" id="totalPercent">100%</span>
+                            <span class="total-label">Total</span>
+                        </div>
+                    </div>
+
+                    <div class="criteria-list" id="criteriaList">
+                        <!-- Criterio 1 -->
+                        <div class="criterion-box">
+                            <div class="input-group">
+                                <label>Nombre del Parámetro</label>
+                                <input type="text" class="crit-name" value="Parcial 1">
+                            </div>
+                            <div class="input-group weight-group">
+                                <label>Peso (%)</label>
+                                <input type="number" class="crit-weight" value="30" oninput="recalcularCriterios()">
+                            </div>
+                        </div>
+
+                        <!-- Criterio 2 -->
+                        <div class="criterion-box">
+                            <div class="input-group">
+                                <label>Nombre del Parámetro</label>
+                                <input type="text" class="crit-name" value="Talleres (Promed)">
+                            </div>
+                            <div class="input-group weight-group">
+                                <label>Peso (%)</label>
+                                <input type="number" class="crit-weight" value="30" oninput="recalcularCriterios()">
+                            </div>
+                        </div>
+
+                        <!-- Criterio 3 -->
+                        <div class="criterion-box">
+                            <div class="input-group">
+                                <label>Nombre del Parámetro</label>
+                                <input type="text" class="crit-name" value="Examen Final">
+                            </div>
+                            <div class="input-group weight-group">
+                                <label>Peso (%)</label>
+                                <input type="number" class="crit-weight" value="40" oninput="recalcularCriterios()">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn-add-dashed" onclick="agregarParametro()">
+                        + Añadir Parámetro
+                    </button>
+                </section>
+
+                <!-- COLUMNA DERECHA: LISTADO DE ESTUDIANTES Y CALIFICACIONES -->
+                <section class="card grades-card">
+                    <div class="card-header-flex align-start">
+                        <div>
+                            <h3>Listado de Estudiantes y Calificaciones</h3>
+                            <p class="subtext">Registro activo • Calificaciones ponderadas según criterios establecidos</p>
+                        </div>
+                        <div class="meta-badges">
+                            <div class="badge-info">32<br><small>Estudiantes</small></div>
+                            <div class="badge-blue">Semestre<br><strong>2024-1</strong></div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="grades-table" id="tablaNotas">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Estudiante</th>
+                                    <th class="text-center">Parcial 1<br><span class="weight-sub">30%</span></th>
+                                    <th class="text-center">Talleres<br><span class="weight-sub">30%</span></th>
+                                    <th class="text-center">Ex. Final<br><span class="weight-sub">40%</span></th>
+                                    <th class="text-center">Definitiva</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-muted">001</td>
+                                    <td class="font-medium">Alvarez, Carlos</td>
+                                    <td class="text-center"><input type="text" class="grade-input" value="4,2" onchange="calcularFila(this)"></td>
+                                    <td class="text-center"><input type="text" class="grade-input" value="3,8" onchange="calcularFila(this)"></td>
+                                    <td class="text-center"><input type="text" class="grade-input" value="4,0" onchange="calcularFila(this)"></td>
+                                    <td class="text-center final-grade font-bold">4.0</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted">002</td>
+                                    <td class="font-medium">Bermúdez, Diana</td>
+                                    <td class="text-center"><input type="text" class="grade-input" value="3,5" onchange="calcularFila(this)"></td>
+                                    <td class="text-center"><input type="text" class="grade-input" value="4,5" onchange="calcularFila(this)"></td>
+                                    <td class="text-center"><input type="text" class="grade-input" value="3,9" onchange="calcularFila(this)"></td>
+                                    <td class="text-center final-grade font-bold">3.96</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted">003</td>
+                                    <td class="font-medium">Castillo, Esteban</td>
+                                    <td class="text-center"><input type="text" class="grade-input danger-border" value="2,8" onchange="calcularFila(this)"></td>
+                                    <td class="text-center"><input type="text" class="grade-input" value="3,1" onchange="calcularFila(this)"></td>
+                                    <td class="text-center"><input type="text" class="grade-input" value="-" onchange="calcularFila(this)"></td>
+                                    <td class="text-center final-grade font-bold text-muted">-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <!-- FOOTER LEGAL -->
+            <footer class="bottom-footer">
+                <p>© 2024 Sistema de Gestión Académica - Universidad Institucional</p>
+                <div class="footer-links">
+                    <a href="#">Privacidad</a>
+                    <a href="#">Términos de Servicio</a>
+                    <a href="#">Soporte Técnico</a>
+                    <a href="#">Contacto</a>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- JAVASCRIPT DE FUNCIONALIDADES -->
+    <script>
+        function parseGrade(val) {
+            if(!val || val.trim() === '-' || val.trim() === '') return null;
+            let normalized = val.replace(',', '.');
+            let parsed = parseFloat(normalized);
+            return isNaN(parsed) ? null : parsed;
+        }
+
+        function formatGrade(num) {
+            if (num === null) return '-';
+            return num % 1 === 0 ? num.toFixed(1) : parseFloat(num.toFixed(2)).toString();
+        }
+
+        function calcularFila(input) {
+            const tr = input.closest('tr');
+            const inputs = tr.querySelectorAll('.grade-input');
+            const finalCell = tr.querySelector('.final-grade');
+
+            inputs.forEach(inp => {
+                let val = parseGrade(inp.value);
+                if(val !== null && val < 3.0) {
+                    inp.classList.add('danger-border');
+                } else {
+                    inp.classList.remove('danger-border');
+                }
+            });
+
+            const weights = Array.from(document.querySelectorAll('.crit-weight')).map(w => (parseFloat(w.value) || 0) / 100);
+
+            let total = 0;
+            let hasAllGrades = true;
+
+            inputs.forEach((inp, idx) => {
+                let val = parseGrade(inp.value);
+                if (val !== null && weights[idx]) {
+                    total += val * weights[idx];
+                } else {
+                    hasAllGrades = false;
+                }
+            });
+
+            if (hasAllGrades && weights.reduce((a, b) => a + b, 0) > 0) {
+                finalCell.innerText = formatGrade(total);
+                finalCell.classList.remove('text-muted');
+            } else {
+                finalCell.innerText = '-';
+                finalCell.classList.add('text-muted');
+            }
+        }
+
+        function recalcularCriterios() {
+            const weights = document.querySelectorAll('.crit-weight');
+            let sum = 0;
+            weights.forEach(w => sum += parseFloat(w.value) || 0);
+
+            const totalEl = document.getElementById('totalPercent');
+            totalEl.innerText = `${sum}%`;
+            
+            if(sum === 100) {
+                totalEl.style.color = '#0b1a30';
+            } else {
+                totalEl.style.color = '#d32f2f';
+            }
+
+            document.querySelectorAll('#tablaNotas tbody tr input.grade-input').forEach(inp => calcularFila(inp));
+        }
+
+        function agregarParametro() {
+            const container = document.getElementById('criteriaList');
+            const newBox = document.createElement('div');
+            newBox.className = 'criterion-box';
+            newBox.innerHTML = `
+                <div class="input-group">
+                    <label>Nombre del Parámetro</label>
+                    <input type="text" class="crit-name" placeholder="Nuevo Parámetro">
+                </div>
+                <div class="input-group weight-group">
+                    <label>Peso (%)</label>
+                    <input type="number" class="crit-weight" value="0" oninput="recalcularCriterios()">
+                </div>
+            `;
+            container.appendChild(newBox);
+            recalcularCriterios();
+        }
+
+        function filtrarTablaEstudiantes() {
+            const query = document.getElementById('globalSearch').value.toLowerCase();
+            const rows = document.querySelectorAll('#tablaNotas tbody tr');
+
+            rows.forEach(row => {
+                row.style.display = row.innerText.toLowerCase().includes(query) ? '' : 'none';
+            });
+        }
+
+        function guardarBorrador() {
+            alert("💾 Borrador guardado correctamente.");
+        }
+
+        function exportarPlanilla() {
+            alert("📄 Exportando planilla a formato Excel / PDF...");
+        }
+
+        function enviarCoordinacion() {
+            alert("🚀 Planilla de Cálculo Diferencial enviada a Coordinación.");
+        }
+
+        function cerrarSesion() {
+            if(confirm("¿Seguro que deseas cerrar sesión?")) {
+                alert("Sesión finalizada.");
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="calycriterios.css">
+</body>
+</html>

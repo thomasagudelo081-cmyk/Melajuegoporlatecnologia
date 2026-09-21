@@ -31,7 +31,7 @@ const Auth = (() => {
         login: RAIZ + "html/registro.html",
         [ROLES.ADMIN]: RAIZ + "admin/html/Ges_Universidad.html",
         [ROLES.DOCENTE]: RAIZ + "docente/html/gruposA.html",
-        [ROLES.ESTUDIANTE]: RAIZ + "estudiante/html/Perfil_E.html"
+        [ROLES.ESTUDIANTE]: RAIZ + "estudiante/html/Panel_E.html"
     };
 
     // ------------------------------------------------------------------

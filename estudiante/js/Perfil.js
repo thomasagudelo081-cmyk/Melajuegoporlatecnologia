@@ -49,9 +49,7 @@ if (logoutBtn) {
 
             if (confirmar) {
 
-                alert(
-                    "Sesión cerrada correctamente."
-                );
+                Auth.logout();
 
             }
 

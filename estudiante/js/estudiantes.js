@@ -38,9 +38,7 @@ logoutBtn.addEventListener(
 
         if (confirmar) {
 
-            alert(
-                "Sesión cerrada correctamente."
-            );
+            Auth.logout();
 
         }
 
